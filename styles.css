@@ -1,0 +1,36 @@
+body{
+    text-align: center;
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title > h1{
+    font-family: 'Roboto Mono', monospace;
+    color: rgb(255, 241, 223);
+}
+
+.content,
+.operators{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.operators{
+    flex-direction: column;
+}
+
+.numbers{
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+}
