@@ -2,7 +2,7 @@
 let firstNum = [];
 
 // boolean var used to transition from numbers before the operator and after the operator
-let operatorClick = false;
+let operatorClicked = 'none';
 
 // where the operator is stored
 let operator = [];
@@ -12,22 +12,46 @@ let secondNum = [];
 
 // add takes num1 and adds num2
 function add(num1, num2){
-    return num1 + num2;
+    console.log(num1);
+    console.log(operatorClicked);
+    console.log(num2);
+
+    const result = num1 + num2;
+
+    console.log(result);
 }
 
 // subtracts num2 from num1
 function subtract(num1, num2){
-    return num1 - num2;
+    console.log(num1);
+    console.log(operatorClicked);
+    console.log(num2);
+
+    const result = num1 - num2;
+
+    console.log(result);
 }
 
 // multiply num1 by num2
 function multiply(num1, num2){
-    return num1 * num2;
+    console.log(num1);
+    console.log(operatorClicked);
+    console.log(num2);
+
+    const result = num1 * num2;
+
+    console.log(result);
 }
 
 // divide num1 by num2
 function divide(num1, num2){
-    return num1 / num2;
+    console.log(num1);
+    console.log(operatorClicked);
+    console.log(num2);
+
+    const result = num1 / num2;
+
+    console.log(result);
 }
 
 // takes numbers and the operator and calls one of the four functions
@@ -74,13 +98,11 @@ for(let i = 0; i <= 10; i++){
     // ==> when operatorClick is true ==> send the numbers to secondNum
     number.addEventListener('click', clickNum = function(){
 
-        if(operatorClick === true){
+        if(operatorClicked != 'none'){
             secondNum.push(i);
-        }else if(operatorClick === false){
+        }else if(operatorClicked === 'none'){
             firstNum.push(i);
         }
-
-        console.log(firstNum)
     });
 
     number.style.minHeight = '100px';
@@ -118,6 +140,21 @@ const signSet = document.querySelector('.operators');
 for(let i = 0; i < 4; i++){
     const sign = document.createElement('button');
 
+    sign.addEventListener('click', clickSign = function(){
+
+        let signType = sign.textContent; 
+
+        if(signType == '+'){
+            operatorClicked = '+';
+        }if(signType == '−'){
+            operatorClicked = '-';
+        }if(signType == '×'){
+            operatorClicked = '*';
+        }if(signType == '÷'){
+            operatorClicked = '/';
+        }
+    });
+
     sign.style.minHeight = '100px';
     sign.style.minWidth = '100px';
     sign.style.flex = '1';
@@ -138,3 +175,19 @@ for(let i = 0; i < 4; i++){
 
     signSet.appendChild(sign);
 }
+
+// equal sign
+const equal = document.querySelector('.equal');
+
+equal.addEventListener('click', function(){
+    let num1 = parseInt(firstNum.join(''));
+    let num2 = parseInt(secondNum.join(''));
+
+    operate(num1, operatorClicked, num2);
+});
+
+equal.style.fontSize = '30px';
+equal.textContent = '=';
+
+// Display
+const display = document.querySelector('.display');

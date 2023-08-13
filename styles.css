@@ -5,6 +5,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 
 .title{
@@ -16,6 +17,16 @@ body{
 .title > h1{
     font-family: 'Roboto Mono', monospace;
     color: rgb(255, 241, 223);
+}
+
+
+.display{
+    background-color: black;
+    min-height: 150px;
+    min-Width: 390px;
+    margin-left: 1px;
+    border-style: solid;
+    border-color: rgb(255, 241, 223);
 }
 
 .content,
@@ -33,4 +44,12 @@ body{
     width: 300px;
     display: flex;
     flex-wrap: wrap;
+}
+
+.equal{
+    background-color: rgb(255, 241, 223);
+    min-width: 400px;
+    min-height: 100px;
+    border-style: solid;
+    border-width: 1px 2px 2px 2px;
 }
