@@ -2,10 +2,7 @@
 let firstNum = [];
 
 // boolean var used to transition from numbers before the operator and after the operator
-let operatorClicked = 'none';
-
-// where the operator is stored
-let operator = [];
+let operatorClicked = '';
 
 // array where numbers are stored after the operator is selected
 let secondNum = [];
@@ -17,8 +14,12 @@ function add(num1, num2){
     console.log(num2);
 
     const result = num1 + num2;
+    
+    solution.textContent = result;
 
-    console.log(result);
+    firstNum = [];
+    secondNum = [];
+    operatorClicked = '';
 }
 
 // subtracts num2 from num1
@@ -29,7 +30,11 @@ function subtract(num1, num2){
 
     const result = num1 - num2;
 
-    console.log(result);
+    solution.textContent = result;
+
+    firstNum = [];
+    secondNum = [];
+    operatorClicked = '';
 }
 
 // multiply num1 by num2
@@ -40,7 +45,11 @@ function multiply(num1, num2){
 
     const result = num1 * num2;
 
-    console.log(result);
+    solution.textContent = result;
+
+    firstNum = [];
+    secondNum = [];
+    operatorClicked = '';
 }
 
 // divide num1 by num2
@@ -51,7 +60,11 @@ function divide(num1, num2){
 
     const result = num1 / num2;
 
-    console.log(result);
+    solution.textContent = result;
+
+    firstNum = [];
+    secondNum = [];
+    operatorClicked = '';
 }
 
 // takes numbers and the operator and calls one of the four functions
@@ -98,11 +111,13 @@ for(let i = 0; i <= 10; i++){
     // ==> when operatorClick is true ==> send the numbers to secondNum
     number.addEventListener('click', clickNum = function(){
 
-        if(operatorClicked != 'none'){
-            secondNum.push(i);
-        }else if(operatorClicked === 'none'){
+        if(!operatorClicked){
             firstNum.push(i);
+        }else{
+            secondNum.push(i);
         }
+
+        updateScreen();
     });
 
     number.style.minHeight = '100px';
@@ -184,10 +199,59 @@ equal.addEventListener('click', function(){
     let num2 = parseInt(secondNum.join(''));
 
     operate(num1, operatorClicked, num2);
+    updateScreen(); // Update the screen after calculation
 });
 
 equal.style.fontSize = '30px';
 equal.textContent = '=';
 
 // Display
-const display = document.querySelector('.display');
+const display = document.querySelector('.displayContent');
+
+const screen = document.createElement('p');
+const solution = document.createElement('p');
+
+screen.style.fontSize = '20px';
+screen.style.color = 'rgb(255, 241, 223)';
+screen.style.alignSelf = 'flex-start';
+
+solution.style.fontSize = '20px';
+solution.style.color = 'rgb(255, 241, 223)';
+solution.style.alignSelf = 'flex-end';
+
+display.appendChild(screen);
+display.appendChild(solution);
+
+// clear button
+const clear = document.querySelector('.clear')
+
+clear.addEventListener('click',() => {
+    firstNum = [];
+    secondNum = [];
+    operatorClicked = '';
+    solution.textContent = '';
+})
+
+clear.textContent = 'Clear';
+clear.style.fontFamily = 'Roboto Mono';
+clear.style.fontSize = '30px';
+
+// Update the screen content
+function updateScreen() {
+    // Display the numbers and operatorClicked if available
+    let displayText = '';
+
+    if (firstNum.length > 0) {
+        displayText += firstNum.join('');
+    }
+
+    if (operatorClicked) {
+        displayText += ' ' + operatorClicked;
+    }
+
+    if (secondNum.length > 0) {
+        displayText += ' ' + secondNum.join('');
+    }
+
+    screen.textContent = displayText;
+}
